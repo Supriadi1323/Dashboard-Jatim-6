@@ -1,0 +1,7 @@
+# Data operasional internal — jangan unggah ke repository publik
+data.json
+*.xlsx
+*.xls
+*.csv
+.DS_Store
+Thumbs.db

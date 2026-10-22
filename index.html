@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Jawa Timur 6 | Performance Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">J6</div><div><strong>JAWA TIMUR 6</strong><small>Performance Intelligence</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <a class="nav active" href="#overview">▦ <span>Overview</span></a>
+      <a class="nav" href="#branches">▤ <span>Branch Performance</span></a>
+      <a class="nav" href="#collection">◷ <span>Collection Health</span></a>
+      <div class="sidebar-foot"><span class="live-dot"></span> Dashboard mode <b>Standalone</b><small>Terpisah dari Marley</small></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div><div class="eyebrow">JAWA 2 / REGIONAL</div><h1>Jawa Timur 6 Dashboard</h1><p class="muted">Monitoring performa branch dan collection dalam satu tampilan.</p></div>
+        <div class="top-actions"><span class="date-chip" id="cutoffDate">Memuat data…</span><button id="refreshBtn" class="btn">↻ Refresh</button></div>
+      </header>
+      <section class="filters panel">
+        <div class="filter-title"><span class="filter-icon">⌕</span><div><strong>Filter data</strong><small>Persempit analisis berdasarkan area atau branch</small></div></div>
+        <label>Area<select id="areaFilter"><option value="all">Semua area</option></select></label>
+        <label>Branch<select id="branchFilter"><option value="all">Semua branch</option></select></label>
+        <label class="search-label">Cari branch<input id="searchInput" type="search" placeholder="Ketik nama branch…"></label>
+        <button id="resetBtn" class="btn btn-light">Reset</button>
+      </section>
+      <section id="overview" class="kpi-grid">
+        <article class="kpi panel"><div class="kpi-top"><span>Total Branch</span><span class="kpi-icon purple">▦</span></div><strong id="kpiBranches">—</strong><small>Branch dalam filter aktif</small></article>
+        <article class="kpi panel"><div class="kpi-top"><span>RR Current</span><span class="kpi-icon green">↗</span></div><strong id="kpiRR">—</strong><small>Weighted repayment rate</small></article>
+        <article class="kpi panel"><div class="kpi-top"><span>NOA Current</span><span class="kpi-icon blue">◉</span></div><strong id="kpiNOA">—</strong><small>Portofolio current</small></article>
+        <article class="kpi panel"><div class="kpi-top"><span>NOA 1–30</span><span class="kpi-icon orange">!</span></div><strong id="kpiDPD">—</strong><small>Bucket awal yang perlu dijaga</small></article>
+        <article class="kpi panel"><div class="kpi-top"><span>NOA 90+</span><span class="kpi-icon red">⌁</span></div><strong id="kpi90">—</strong><small>Bucket risiko tertinggi</small></article>
+      </section>
+      <section class="chart-grid">
+        <article class="panel chart-panel"><div class="panel-heading"><div><h2>Tren RR Current</h2><p class="muted">Pergerakan repayment rate harian</p></div><span class="tag">30 hari terakhir</span></div><div class="chart-wrap"><canvas id="rrChart"></canvas></div></article>
+        <article id="collection" class="panel chart-panel"><div class="panel-heading"><div><h2>Komposisi DPD</h2><p class="muted">Total NOA per bucket</p></div></div><div class="chart-wrap"><canvas id="dpdChart"></canvas></div></article>
+      </section>
+      <section id="branches" class="panel table-panel">
+        <div class="panel-heading table-heading"><div><h2>Branch performance</h2><p class="muted">Klik header untuk mengurutkan tabel.</p></div><span id="rowCount" class="tag">0 branch</span></div>
+        <div class="table-scroll"><table><thead><tr>
+          <th data-sort="branch">Branch ↕</th><th data-sort="area">Area ↕</th><th data-sort="status">Status ↕</th><th data-sort="movement">Movement ↕</th><th data-sort="noa_current" class="num">NOA Current ↕</th><th data-sort="rr_current" class="num">RR Current ↕</th><th data-sort="noa_1_30" class="num">DPD 1–30 ↕</th><th data-sort="noa_31_60" class="num">DPD 31–60 ↕</th><th data-sort="noa_61_90" class="num">DPD 61–90 ↕</th><th data-sort="noa_90_plus" class="num">DPD 90+ ↕</th>
+        </tr></thead><tbody id="branchRows"><tr><td colspan="10" class="empty">Memuat data…</td></tr></tbody></table></div>
+        <div class="table-footer"><span id="tableSummary">—</span><button id="exportBtn" class="btn btn-light">⇩ Export CSV</button></div>
+      </section>
+      <footer><span>Jatim 6 Performance Intelligence</span><span>Internal-use template · Periksa izin data sebelum publikasi</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
